@@ -24,16 +24,10 @@ def graph_init(data):
 def BFS(graph, path):
 	visited, queue = set(), deque([path[0]])
 	queue.append(path[0])
-	# print("Path result is ", path[1])
 	while queue:
 		current = queue.popleft()
-		# print(queue)
 		adjNodes = graph.get(current)
-		# print(current, " has adjacent nodes ", adjNodes)
 		if adjNodes is not None:
-			# print("current ", current)
-			# print("adjacent nodes ",adjNodes)
-			# for adjNode in adjNodes:
 			for adjNode in adjNodes:
 				if adjNode not in visited:
 					if adjNode == path[1]:
@@ -42,12 +36,16 @@ def BFS(graph, path):
 					queue.append(adjNode)
 	return 0
 
+#read_input is a function that takes an input file from argument and parses them into an array of tuples 
+#A tuple represents an edge in the format (<start>, <end>, <weight>) 
 # Read in the number of vertices (n) and edges (m)
 n = int(input())
 m = int(input())
-
+#edges and queries represent lists of tuples.
 edges, queries = [], []
+#initialise an empty dictionary
 graph = {}
+
 for _ in range(m):
     edges.append(input().split())
 
@@ -58,26 +56,8 @@ q = int(input())
 
 for _ in range(q):
     queries.append(input().split())
-	
-# Print a `1` to stdout for each query. This section should be altered to instead print a `1` where the
-# query indicates a connection and `0` else.
-# for query in queries:
-# print (query)
+#generate graph
 graph = graph_init(edges)
-# for key, value in sorted(graph.items()):
-# 	print(key,value)
-# cntr = 0
-for path in queries:
-	# print("path ", path)
-	result = BFS(graph, path)
-	print(result)
-# 	if result == 0:
-# 		print("There is a path between", path)
-# 		cntr += 1
-# print(cntr)
-
-#GENERIC CODE#
-# for _ in queries:
-#    print(int(True))
-# for edge in edges:
-# 	print(edge)
+#run search on each path.
+for path in queries: 
+	print(BFS(graph, path))
