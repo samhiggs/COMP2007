@@ -39,6 +39,8 @@ def BFS(graph, path):
 #read_input is a function that takes an input file from argument and parses them into an array of tuples 
 #A tuple represents an edge in the format (<start>, <end>, <weight>) 
 # Read in the number of vertices (n) and edges (m)
+#edges and queries represent lists of tuples
+# Read in the number of vertices (n) and edges (m)
 n = int(input())
 m = int(input())
 #edges and queries represent lists of tuples.
