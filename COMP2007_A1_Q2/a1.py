@@ -19,15 +19,18 @@ def graph_init(data):
 ################union find algorithm##################
 nodeMap = {}
 #makeset initialises every element as it's own set. there will begin with n sets.
-def makeset(nodes):
-	return nodeSets
+def makeset(node):
+	nodeMap[node] = node
 
 #union combines 2 elements from different sets
 def union(nodeA, nodeB):
-
+	if(nodeMap[nodeA] != nodeA):
+		nodeMap[nodeB] = nodeA
+	else:
+		nodeMap[nodeA] = nodeB
 #this looks for the set in which the node is 
 def findset(node):
-
+	return nodeMap[node]
 #OUTPUT: connected graph, @graph, that uses the minimum weight from the edges in @queue
 def Kruskal(graph, queue):
 	cost = 0;
