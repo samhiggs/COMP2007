@@ -1,7 +1,33 @@
 from collections import deque
 import heapq
 
+nodeSet = {}
+rank = {}
 
+def makeset(node):
+    nodeSet[node] = node
+    rank[node] = 0
+
+def union(nodeA, nodeB):
+    #I Need to find the root of the nodes to unionise.
+    rootA = find(nodeA)
+    rootB = find(nodeB)
+    if(rootA != rootB):
+    	if(rank[rootA] <= rank[rootB]):
+    		nodeSet[rootA] = rootB
+		    if(rank[rootA] == rank[rootB]):
+		    	rank[rootB] += 1
+    	else:
+    		nodeSet[rootB] = rootA
+
+
+
+#returns the set that the node belongs to.        
+def find(node):
+    while nodeSet[node] != node:
+        nodeSet[node] = find(nodeSet[node])
+    return nodeSet[node]
+    
 #function to generate a graph
 def graph_init(data):
 	graph = {}

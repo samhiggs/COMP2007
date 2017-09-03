@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"graph",
+				"graph_init"
+			],
+			[
 				"for",
 				"for_member"
 			],
@@ -367,6 +371,35 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "from collections import deque\nimport heapq\n\nnodeSet = {}\nrank = {}\n\ndef makeset(node):\n    nodeSet[node] = node\n    rank[node] = 0\n\ndef union(nodeA, nodeB):\n    #I Need to find the root of the nodes to unionise.\n    rootA = find(nodeA)\n    rootB = find(nodeB)\n    if(rootA != rootB):\n    \tif(rank[rootA] <= rank[rootB]):\n    \t\tnodeSet[rootA] = rootB\n\t\t    if(rank[rootA] == rank[rootB]):\n\t\t    \trank[rootB] += 1\n    \telse:\n    \t\tnodeSet[rootB] = rootA\n\n\n\n#returns the set that the node belongs to.        \ndef find(node):\n    while nodeSet[node] != node:\n        nodeSet[node] = find(nodeSet[node])\n    return nodeSet[node]\n    \n#function to generate a graph\ndef graph_init(data):\n\tgraph = {}\n\tfor edges in data:\n\t\tif edges[0] in graph:\n\t\t\tgraph.get(edges[0]).append(edges[1])\n\t\telse:\n\t\t\tgraph[edges[0]] = [edges[1]]\n\t\tif edges[1] in graph:\n\t\t\tgraph.get(edges[1]).append(edges[0])\n\t\telse: \n\t\t\tgraph[edges[1]] = [edges[0]]\n\treturn graph  \n\n################union find algorithm##################\nnodeMap = {}\n#makeset initialises every element as it's own set. there will begin with n sets.\ndef makeset(node):\n\tnodeMap[node] = node\n\n#union combines 2 elements from different sets\ndef union(nodeA, nodeB):\n\tif(nodeMap[nodeA] != nodeA):\n\t\tnodeMap[nodeB] = nodeA\n\telse:\n\t\tnodeMap[nodeA] = nodeB\n#this looks for the set in which the node is \ndef findset(node):\n\treturn nodeMap[node]\n\n\n#OUTPUT: connected graph, @graph, that uses the minimum weight from the edges in @queue\ndef Kruskal(graph, queue):\n\tcost = 0;\n\tfor edge in queue:\n\t\t# if both vertices have been visited, then a cycle will be created or the edge already exists\n\t\t# so we want to not do anything.\n\t\tif(edge[0] in graph  and edge[1] in graph):\n\t\t\tcontinue\n\t\telse:\n\t\t\t#this sneaky devil will add k,v pair only if it doesn't exist.\n\t\t\t# graph.setdefault(edge[0], edge[1])\n\t\t\t# graph.setdefault(edge[1], edge[0])\n\n\t\t\t# if(edge[0] in graph):\n\t\t\t# \tgraph.get(edge[0]).append(edge[1])\n\t\t\t# else:\n\t\t\t# \tgraph[edge[0]] = graph[edge[1]]\n\t\t\t# if(edge[1] in graph):\n\t\t\t# \tgraph.get(edge[1]).append(edge[0])\n\t\t\t# else:\n\t\t\t# \tgraph[edge[1]] = graph[edge[0]]\n\t\t\tcost += float(edge[2]) #add the weight of the edge.\n\tprint(\"%.2f\" % round(cost,2))\n\t# print(cost)\n\n# Read in the number of vertices (n) and edges (m)\nn = int(input())\nm = int(input())\n\npossibleNodes, existingNodes = [], []\n\ngraph = {}\nqueue = []\ncost = 0\n\nfor _ in range(m):\n    possibleNodes.append(input().split())\n\n#a is the number of existing edges.\na = int(input())\n\nfor _ in range(a):\n    existingNodes.append(input().split())\n\n\n# print(\"Possible Edges: \")\n# for edge in possibleNodes:\n# \tprint(edge)\n# print(\"Existing Edges: \")\n# for edge in existingNodes:\n# \tprint(edge)\n\ngraph = graph_init(existingNodes)\n# for k,v in graph.items():\n# \tprint(k,\" \", v)\nKruskal(graph, possibleNodes)\n# for node in possibleNodes:\n# \tprint(node)\n\n# for node in existingNodes:\n# \tprint(node)\n",
+			"file": "a1.py",
+			"file_size": 2882,
+			"file_write_time": 131488893509232807,
+			"settings":
+			{
+				"buffer_size": 2886,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "run.sh",
+			"settings":
+			{
+				"buffer_size": 82,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graph8.in",
+			"settings":
+			{
+				"buffer_size": 108,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -580,6 +613,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/SamHiggs/Google Drive/University/S2/COMP2007 Algorithms/Assignment1/COMP2007_A1_Q2/graph8.in",
+		"/C/Users/SamHiggs/Google Drive/University/S2/COMP2007 Algorithms/Assignment1/COMP2007_A1_Q2/run.sh",
+		"/C/Users/SamHiggs/Google Drive/University/S2/COMP2007 Algorithms/Assignment1/COMP2007_A1_Q2/graph250.in",
 		"/C/Users/SamHiggs/Google Drive/University/S2/COMP2007 Algorithms/Assignment1/COMP2007_A1_Q2/a1.py",
 		"/C/Users/SamHiggs/Google Drive/University/MOOC/DSE200x/DSE_Python/Python Challenges/banner_name.py",
 		"/C/Users/SamHiggs/Google Drive/University/MOOC/DSE200x/DSE_Python/getting_started.py",
@@ -704,10 +740,7 @@
 		"/C/Users/SamHiggs/Google Drive/University/COMP2129/Lecture programs/PointerTest.c",
 		"/C/Users/SamHiggs/Downloads/Week 3 - Solutions/week3/q4.sh",
 		"/C/Users/SamHiggs/Downloads/Week 3 - Solutions/week3/q5.c",
-		"/C/Users/SamHiggs/Desktop/C++ _ Understanding pointers - LinuxConfig.org.html",
-		"/C/Users/SamHiggs/Desktop/displaychip2.hex",
-		"/C/Users/SamHiggs/simple.py",
-		"/C/Program Files/Splunk/etc/apps/custom_search/bin/usercount.py"
+		"/C/Users/SamHiggs/Desktop/C++ _ Understanding pointers - LinuxConfig.org.html"
 	],
 	"find":
 	{
@@ -725,6 +758,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"vertex",
+			"item",
 			"print",
 			"Turqoise",
 			"338",
@@ -867,8 +902,93 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "a1.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2886,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2102,
+								1897
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 313.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "run.sh",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 82,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "graph8.in",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 108,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3,
+								3
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
