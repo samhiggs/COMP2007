@@ -31,6 +31,8 @@ def union(nodeA, nodeB):
 #this looks for the set in which the node is 
 def findset(node):
 	return nodeMap[node]
+
+
 #OUTPUT: connected graph, @graph, that uses the minimum weight from the edges in @queue
 def Kruskal(graph, queue):
 	cost = 0;
